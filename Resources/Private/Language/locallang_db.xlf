@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf"
+        date="2022-12-31T23:18:14Z" product-name="hh_tt_address_places">
+        <header/>
+        <body>
+            <trans-unit id="tx_hhttaddressplaces_domain_model_place" resname="tx_hhttaddressplaces_domain_model_place">
+                <source>Place</source>
+            </trans-unit>
+            <trans-unit id="tt_address.tx_extbase_type.Tx_HhTtAddressPlaces_Place" resname="tt_address.tx_extbase_type.Tx_HhTtAddressPlaces_Place">
+                <source>Address places Place</source>
+            </trans-unit>
+            <trans-unit id="tx_hhttaddressplaces.tx_extbase_type" resname="tx_hhttaddressplaces.tx_extbase_type">
+                <source>Record Type</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

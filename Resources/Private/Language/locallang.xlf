@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="EXT:hh_tt_address_places/Resources/Private/Language/locallang.xlf"
+        date="2022-12-31T23:18:14Z" product-name="hh_tt_address_places">
+        <header/>
+        <body>
+            <trans-unit id="tx_hhttaddressplaces_domain_model_place" resname="tx_hhttaddressplaces_domain_model_place">
+                <source>Place</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
