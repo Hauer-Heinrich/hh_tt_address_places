@@ -1,5 +1,6 @@
-# tt_address_places
-tt_address_places is a TYPO3 extension.
+# hh_tt_address_places
+hh_tt_address_places is a TYPO3 extension.
+Use tt_address not only to manage / deliver personal addresses but also for locations / company addresses.
 
 ### Installation
 ... like any other TYPO3 extension [extensions.typo3.org](https://extensions.typo3.org/ "TYPO3 Extension Repository")
