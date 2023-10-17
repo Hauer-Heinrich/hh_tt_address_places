@@ -2,6 +2,7 @@
 defined('TYPO3') || die();
 
 use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use \HauerHeinrich\HhTtAddressPlaces\UserFunc\TcaTtAddress;
 
 call_user_func(function() {
     // $GLOBALS['TCA']['tt_address']['columns']['type']['config']['items']['3'] =
@@ -41,6 +42,7 @@ call_user_func(function() {
         'before: gender'
     );
 
+    $GLOBALS['TCA']['tt_address']['ctrl']['label_userFunc'] = TcaTtAddress::class . '->label';
     // inherit and extend the show items from the parent class
     if (isset($GLOBALS['TCA']['tt_address']['types']['0']['showitem'])) {
         $GLOBALS['TCA']['tt_address']['types']['place']['showitem'] = '
