@@ -1,0 +1,19 @@
+tt_address {
+    label = company
+}
+
+TCAdefaults.tt_address {
+    tx_extbase_type = place
+}
+
+TCEFORM {
+    tt_address {
+        tx_extbase_type.disabled = 1
+    }
+}
+
+mod {
+    web_list {
+        allowedNewTables = tt_address
+    }
+}
