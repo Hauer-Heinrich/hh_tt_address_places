@@ -21,11 +21,11 @@
             "url": "https://www.paypal.com/paypalme/hauerheinrich"
         }
     ],
-    "version": "2.1.1",
+    "version": "2.2.0",
     "license": ["GPL-2.0-or-later"],
     "keywords": ["TYPO3 CMS", "address", "places", "companies", "Extension"],
     "replace": {
-        "hauer-heinrich/hh-tt_address_places": "self.version",
+        "hauer-heinrich/hh_tt_address_places": "self.version",
         "typo3-ter/hh-tt-address-places": "self.version"
     },
     "require": {

@@ -18,6 +18,6 @@ TCEFORM {
 mod {
     web_list {
         allowedNewTables = tt_address
-        hideTables = tt_content
+        hideTables = tt_content,tx_hhttaddressplaces_domain_model_periodoftime
     }
 }

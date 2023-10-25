@@ -13,6 +13,96 @@
             <trans-unit id="tx_hhttaddressplaces.tx_extbase_type" resname="tx_hhttaddressplaces.tx_extbase_type">
                 <source>Record Type</source>
             </trans-unit>
+
+            <trans-unit id="hh_tt_address_places.opening_hours" resname="hh_tt_address_places.opening_hours">
+                <source>Opening Hours</source>
+            </trans-unit>
+
+
+            <trans-unit id="tx_hhttaddressplaces_domain_model_place.opening_hours" resname="tx_hhttaddressplaces_domain_model_place.opening_hours">
+                <source>Opening Hours</source>
+            </trans-unit>
+            <trans-unit id="tx_hhttaddressplaces_domain_model_periodoftime" resname="tx_hhttaddressplaces_domain_model_periodoftime">
+                <source>Opening Hours Specification</source>
+            </trans-unit>
+
+            <trans-unit id="tx_hhttaddressplaces_domain_model_periodoftime.title" resname="tx_hhttaddressplaces_domain_model_periodoftime.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_hhttaddressplaces_domain_model_periodoftime.title.description" resname="tx_hhttaddressplaces_domain_model_periodoftime.title.description">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_hhttaddressplaces_domain_model_periodoftime.description" resname="tx_hhttaddressplaces_domain_model_periodoftime.description">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="tx_hhttaddressplaces_domain_model_periodoftime.valid_for" resname="tx_hhttaddressplaces_domain_model_periodoftime.valid_for">
+                <source>Valid for</source>
+            </trans-unit>
+
+            <trans-unit id="tx_hhttaddressplaces_domain_model_periodoftime.open" resname="tx_hhttaddressplaces_domain_model_periodoftime.open">
+                <source>Open</source>
+            </trans-unit>
+            <trans-unit id="tx_hhttaddressplaces_domain_model_periodoftime.close" resname="tx_hhttaddressplaces_domain_model_periodoftime.close">
+                <source>Close</source>
+            </trans-unit>
+
+
+            <trans-unit id="tx_hhttaddressplaces_domain_model_periodoftime" resname="tx_hhttaddressplaces_domain_model_periodoftime">
+                <source>Period Of Time</source>
+            </trans-unit>
+            <trans-unit id="tx_hhttaddressplaces_domain_model_periodoftime.closed_from_date" resname="tx_hhttaddressplaces_domain_model_periodoftime.closed_from_date">
+                <source>From Date</source>
+            </trans-unit>
+            <trans-unit id="tx_hhttaddressplaces_domain_model_periodoftime.closed_to_date" resname="tx_hhttaddressplaces_domain_model_periodoftime.closed_to_date">
+                <source>To Date</source>
+            </trans-unit>
+            <trans-unit id="tx_hhttaddressplaces_domain_model_periodoftime.hours_specification" resname="tx_hhttaddressplaces_domain_model_periodoftime.hours_specification">
+                <source>Hours Specification</source>
+            </trans-unit>
+
+            <trans-unit id="day.monday" resname="day.monday">
+                <source>Monday</source>
+            </trans-unit>
+            <trans-unit id="day.tuesday" resname="day.tuesday">
+                <source>Tuesday</source>
+            </trans-unit>
+            <trans-unit id="day.wednesday" resname="day.wednesday">
+                <source>Wednesday</source>
+            </trans-unit>
+            <trans-unit id="day.thursday" resname="day.thursday">
+                <source>Thursday</source>
+            </trans-unit>
+            <trans-unit id="day.friday" resname="day.friday">
+                <source>Friday</source>
+            </trans-unit>
+            <trans-unit id="day.saturday" resname="day.saturday">
+                <source>Saturday</source>
+            </trans-unit>
+            <trans-unit id="day.sunday" resname="day.sunday">
+                <source>Sunday</source>
+            </trans-unit>
+
+            <trans-unit id="day.monday.description" resname="day.monday.description">
+                <source>E. g.: If you have lunch time you can use the second open / close fields.</source>
+            </trans-unit>
+            <trans-unit id="day.tuesday.description" resname="day.tuesday.description">
+                <source></source>
+            </trans-unit>
+            <trans-unit id="day.wednesday.description" resname="day.wednesday.description">
+                <source></source>
+            </trans-unit>
+            <trans-unit id="day.thursday.description" resname="day.thursday.description">
+                <source></source>
+            </trans-unit>
+            <trans-unit id="day.friday.description" resname="day.friday.description">
+                <source></source>
+            </trans-unit>
+            <trans-unit id="day.saturday.description" resname="day.saturday.description">
+                <source></source>
+            </trans-unit>
+            <trans-unit id="day.sunday.description" resname="day.sunday.description">
+                <source></source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

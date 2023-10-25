@@ -1,6 +1,6 @@
 # hh_tt_address_places
 hh_tt_address_places is a TYPO3 extension.
-Use tt_address not only to manage / deliver personal addresses but also for locations / company addresses.
+Use tt_address not only to manage / deliver personal addresses but also for locations / company addresses incl. opening hours.
 
 ### Installation
 ... like any other TYPO3 extension [extensions.typo3.org](https://extensions.typo3.org/ "TYPO3 Extension Repository")
@@ -8,14 +8,20 @@ Don't forget to include the PageTS -> backend->rootPage->site configuration->res
 
 ### Configuration
 Add the PageTs to the page / directory (from TYPO3 BE site-tree).
-Keep default tt_address (persons) and tt_address_places (places / companies) in a seperate page / directory!
+Keep default tt_address (persons) and hh_tt_address_places (places / companies) in a seperate page / directory!
+(optional) Add the PageTs (hh_tt_address_places - Allow only Places / Companies) to the storage place of your places / companies.
 
 ### Usage
 You should have all functions from the EXT:tt_address plugins, so use the tt_address plugins to show the places / companies like the "normal" tt_address entries.
+For the opening hours: there are example for the FLUID output at hh_tt_address_places/Resources/Private/Partials/
 
 ### Development
 
 Want to contribute? Great!
+
+#### Preview images:
+![example picture from backend](.github/images/opening-hours.jpg?raw=true "opening-hours")
+![example picture from backend](.github/images/opening-hours-detail.jpg?raw=true "opening-hours")
 
 ##### Copyright notice
 

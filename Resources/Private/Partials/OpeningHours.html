@@ -1,0 +1,40 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<f:if condition="{address.openingHours}">
+    <f:for each="{address.openingHours}" as="openingHours" iteration="i">
+        <div class="opening-hours">
+            <h5>Wir sind für Sie da</h5>
+            <f:if condition="{openingHours.structuredOpeningTimes}">
+                <f:for each="{openingHours.structuredOpeningTimes}" as="times" key="day" iteration="i">
+                    <f:render section="open-hours" arguments="{day: '{day}', times: '{times}'}" />
+                </f:for>
+            </f:if>
+        </div>
+    </f:for>
+</f:if>
+
+<f:section name="open-hours">
+<hhdefault:spaceless emptyLines="true">
+    <div class="day">
+        <f:if condition="{day}">
+            <f:if condition="({times.open.0} && {times.close.0}) || ({times.open.1} && {times.close.1})">
+                <span class="title"><f:translate key="LLL:EXT:tt_address_places/Resources/Private/Language/locallang_db.xlf:day.{day}" /> </span>
+            </f:if>
+            <span class="morning">
+                <f:if condition="{times.open.0} && {times.close.0}">
+                    <time datetime="{times.open.0}"><f:format.date format="H">{times.open.0}</f:format.date></time> bis <time datetime="{times.close.0}"><f:format.date format="H">{times.close.0}</f:format.date></time> Uhr
+                </f:if>
+            </span>
+            <span class="seperator"><f:if condition="{times.open.0} && {times.close.0} && {times.open.1} && {times.close.1}">und</f:if></span>
+            <span class="afternoon">
+                <f:if condition="{times.open.1} && {times.close.1}">
+                    <time datetime="{times.open.1}"><f:format.date format="H">{times.open.1}</f:format.date></time> bis <time datetime="{times.close.1}"><f:format.date format="H">{times.close.1}</f:format.date></time> Uhr
+                </f:if>
+            </span>
+        </f:if>
+    </div>
+</hhdefault:spaceless>
+</f:section>
+
+</html>

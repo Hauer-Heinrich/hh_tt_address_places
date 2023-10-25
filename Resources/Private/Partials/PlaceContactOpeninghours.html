@@ -1,0 +1,33 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<article class="article" itemscope itemtype="http://schema.org/Person">
+    <div class="article-container">
+        <f:if condition="{address.firstImage}">
+            <div class="ce-image addressImage">
+                <f:if condition="{address.image}">
+                    <f:media file="{address.firstImage}" width="400" class="img-fluid img-thumbnail rounded"
+                        alt="{address.firstImage.originalResource.alt}" title="{address.fullName}" />
+                </f:if>
+            </div>
+        </f:if>
+
+        <div class="ce-bodytext">
+            <f:if condition="{address.description}">
+                <div class="description">
+                    <f:format.html>{address.description}</f:format.html>
+                </div>
+            </f:if>
+
+            <f:render section="contact" partial="Address" arguments="{_all}" />
+        </div>
+
+        <f:if condition="{address.openingHours}">
+            <f:render partial="openingHours" arguments="{address: '{address}'}" />
+        </f:if>
+    </div>
+</article>
+
+
+
+</html>

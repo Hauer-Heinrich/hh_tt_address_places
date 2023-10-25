@@ -42,6 +42,27 @@ call_user_func(function() {
         'before: gender'
     );
 
+    $tmp_hh_tt_address_places_columns = [
+        'opening_hours' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:tx_hhttaddressplaces_domain_model_place.opening_hours',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_hhttaddressplaces_domain_model_periodoftime',
+                'foreign_field' => 'place',
+                'maxitems' => 9999,
+                'appearance' => [
+                    'collapseAll' => 0,
+                    'levelLinksPosition' => 'top',
+                    'showSynchronizationLink' => 1,
+                    'showPossibleLocalizationRecords' => 1,
+                    'showAllLocalizationLink' => 1
+                ],
+            ],
+        ],
+    ];
+    ExtensionManagementUtility::addTCAcolumns('tt_address', $tmp_hh_tt_address_places_columns);
+
     $GLOBALS['TCA']['tt_address']['ctrl']['label_userFunc'] = TcaTtAddress::class . '->label';
     // inherit and extend the show items from the parent class
     if (isset($GLOBALS['TCA']['tt_address']['types']['0']['showitem'])) {
@@ -52,7 +73,6 @@ call_user_func(function() {
             --palette--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_palette.building;building,
             image,
             description,
-
             --div--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_tab.address,
                 --palette--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_palette.address;address,
                 --palette--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_palette.coordinates;coordinates,
@@ -60,6 +80,9 @@ call_user_func(function() {
             --div--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_tab.contact,
                 --palette--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_palette.contact;contact,
                 --palette--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_palette.social;social,
+
+            --div--;LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:hh_tt_address_places.opening_hours,
+                opening_hours,
 
             --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
                 --palette--;;language,
