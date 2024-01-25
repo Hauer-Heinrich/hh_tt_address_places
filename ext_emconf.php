@@ -12,7 +12,7 @@ $EM_CONF['hh_tt_address_places'] = [
     'constraints' => [
         'depends' => [
             'typo3' => '10.4.0-11.5.99',
-            'tt_address' => '',
+            'tt_address' => '>=5.3.0',
         ],
         'conflicts' => [],
         'suggests' => [],
