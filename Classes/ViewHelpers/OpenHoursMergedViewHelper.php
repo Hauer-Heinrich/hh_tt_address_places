@@ -64,11 +64,13 @@ class OpenHoursMergedViewHelper extends AbstractViewHelper {
 
     public function initializeArguments(){
         $this->registerArgument('hours', 'array', '', true);
+        $this->registerArgument('timeFormat', 'string', 'Time format e. g. "H:i:s"', false, 'H:i');
     }
 
     public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext){
         $openingHours = $arguments['hours'];
         $shortenOpeningHours = array_diff($openingHours, ['00:00:00']);
+        $timeFormat = isset($arguments['timeFormat']) ? $arguments['timeFormat'] : 'H:i';
 
         $newArray = [
             'monday' => '',
@@ -85,15 +87,16 @@ class OpenHoursMergedViewHelper extends AbstractViewHelper {
                 switch ($day) {
                     case str_contains($day, 'open_'.$resultDay):
                         if(isset($shortenOpeningHours['open_'.$resultDay]) && isset($shortenOpeningHours['close_'.$resultDay])) {
-                            $newArray[$resultDay] = $shortenOpeningHours['open_'.$resultDay] . ' - ' . $shortenOpeningHours['close_'.$resultDay];
+                            $timeOpen = new \DateTime($shortenOpeningHours['open_'.$resultDay]);
+                            $timeClose = new \DateTime($shortenOpeningHours['close_'.$resultDay]);
+                            $newArray[$resultDay] = $timeOpen->format($timeFormat) . ' - ' . $timeClose->format($timeFormat);
                         }
+
                         if(isset($shortenOpeningHours['open_'.$resultDay.'2']) && isset($shortenOpeningHours['close_'.$resultDay.'2'])) {
-                            if(!empty($newArray[$resultDay])) {
-                                $newArray[$resultDay] .= ', ';
-                            } else {
-                                $newArray[$resultDay] = '';
-                            }
-                            $newArray[$resultDay] .= $shortenOpeningHours['open_'.$resultDay.'2'] . ' - ' . $shortenOpeningHours['close_'.$resultDay.'2'];
+                            $newArray[$resultDay] .= empty($newArray[$resultDay]) ? '' : ', ' ;
+                            $timeOpen2 = new \DateTime($shortenOpeningHours['open_'.$resultDay.'2']);
+                            $timeClose2 = new \DateTime($shortenOpeningHours['close_'.$resultDay.'2']);
+                            $newArray[$resultDay] .= $timeOpen2->format($timeFormat) . ' - ' . $timeClose2->format($timeFormat);
                         }
                     break;
                     default:
