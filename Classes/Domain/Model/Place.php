@@ -17,6 +17,9 @@ namespace HauerHeinrich\HhTtAddressPlaces\Domain\Model;
  * Place
  */
 class Place extends \FriendsOfTYPO3\TtAddress\Domain\Model\Address {
+
+    protected $txExtbaseType = '';
+
     /**
      * openingHours
      *
@@ -46,6 +49,16 @@ class Place extends \FriendsOfTYPO3\TtAddress\Domain\Model\Address {
     public function initializeObject()
     {
         $this->openingHours = $this->openingHours ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
+
+    public function getTxExtbaseType(): string
+    {
+        return $this->txExtbaseType;
+    }
+
+    public function setTxExbaseType($extbaseType): void
+    {
+        $this->txExtbaseType = $extbaseType;
     }
 
     /**
