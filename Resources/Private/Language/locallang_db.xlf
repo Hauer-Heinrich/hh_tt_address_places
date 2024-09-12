@@ -46,6 +46,13 @@
                 <source>Close</source>
             </trans-unit>
 
+            <trans-unit id="tx_hhttaddressplaces_domain_model_periodoftime.appointment" resname="tx_hhttaddressplaces_domain_model_periodoftime.appointment">
+                <source>Appointment</source>
+            </trans-unit>
+            <trans-unit id="tx_hhttaddressplaces_domain_model_periodoftime.appointment" resname="tx_hhttaddressplaces_domain_model_periodoftime.appointment.description">
+                <source>For example use as "[DAY] by appointment only"!</source>
+            </trans-unit>
+
 
             <trans-unit id="tx_hhttaddressplaces_domain_model_periodoftime" resname="tx_hhttaddressplaces_domain_model_periodoftime">
                 <source>Period Of Time</source>

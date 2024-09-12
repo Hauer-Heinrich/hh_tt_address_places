@@ -29,6 +29,13 @@
             <trans-unit id="day.sunday">
                 <source>Sunday</source>
             </trans-unit>
+
+            <trans-unit id="day.hour">
+                <source>hour</source>
+            </trans-unit>
+            <trans-unit id="day.appointment">
+                <source>by appointment only</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

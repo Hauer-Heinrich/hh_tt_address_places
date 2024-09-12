@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace HauerHeinrich\HhTtAddressPlaces\Domain\Model;
 
+use \FriendsOfTYPO3\TtAddress\Domain\Model\Address;
 
 /**
  * This file is part of the "Address places" Extension for TYPO3 CMS.
@@ -16,7 +17,7 @@ namespace HauerHeinrich\HhTtAddressPlaces\Domain\Model;
 /**
  * Place
  */
-class Place extends \FriendsOfTYPO3\TtAddress\Domain\Model\Address {
+class Place extends Address {
 
     protected $txExtbaseType = '';
 

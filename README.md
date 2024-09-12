@@ -90,6 +90,9 @@ plugin.tx_hh_tt_address_places {
             day.friday = Freitag
             day.saturday = Samstag
             day.sunday = Sonntag
+
+            day.hour = Uhr
+            day.appointment = nur nach Vereinbarung
         }
     }
 }

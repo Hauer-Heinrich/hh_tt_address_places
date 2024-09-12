@@ -192,6 +192,17 @@ return [
                 'default' => 0,
             ]
         ],
+        'appointment_monday' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:tx_hhttaddressplaces_domain_model_periodoftime.appointment',
+            'description' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:tx_hhttaddressplaces_domain_model_periodoftime.appointment.description',
+            'config' => [
+                'type' => 'check',
+                'items' => [
+                    [ 'label' => 'appointment', ],
+                ],
+            ],
+        ],
 
         'open_tuesday' => [
             'exclude' => true,
@@ -236,6 +247,17 @@ return [
                 'format' => 'time',
                 'default' => 0,
             ]
+        ],
+        'appointment_tuesday' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:tx_hhttaddressplaces_domain_model_periodoftime.appointment',
+            'description' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:tx_hhttaddressplaces_domain_model_periodoftime.appointment.description',
+            'config' => [
+                'type' => 'check',
+                'items' => [
+                    [ 'label' => 'appointment', ],
+                ],
+            ],
         ],
 
         'open_wednesday' => [
@@ -282,6 +304,17 @@ return [
                 'default' => 0,
             ]
         ],
+        'appointment_wednesday' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:tx_hhttaddressplaces_domain_model_periodoftime.appointment',
+            'description' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:tx_hhttaddressplaces_domain_model_periodoftime.appointment.description',
+            'config' => [
+                'type' => 'check',
+                'items' => [
+                    [ 'label' => 'appointment', ],
+                ],
+            ],
+        ],
 
         'open_thursday' => [
             'exclude' => true,
@@ -326,6 +359,17 @@ return [
                 'format' => 'time',
                 'default' => 0,
             ]
+        ],
+        'appointment_thursday' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:tx_hhttaddressplaces_domain_model_periodoftime.appointment',
+            'description' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:tx_hhttaddressplaces_domain_model_periodoftime.appointment.description',
+            'config' => [
+                'type' => 'check',
+                'items' => [
+                    [ 'label' => 'appointment', ],
+                ],
+            ],
         ],
 
         'open_friday' => [
@@ -372,6 +416,17 @@ return [
                 'default' => 0,
             ]
         ],
+        'appointment_friday' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:tx_hhttaddressplaces_domain_model_periodoftime.appointment',
+            'description' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:tx_hhttaddressplaces_domain_model_periodoftime.appointment.description',
+            'config' => [
+                'type' => 'check',
+                'items' => [
+                    [ 'label' => 'appointment', ],
+                ],
+            ],
+        ],
 
         'open_saturday' => [
             'exclude' => true,
@@ -416,6 +471,17 @@ return [
                 'format' => 'time',
                 'default' => 0,
             ]
+        ],
+        'appointment_saturday' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:tx_hhttaddressplaces_domain_model_periodoftime.appointment',
+            'description' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:tx_hhttaddressplaces_domain_model_periodoftime.appointment.description',
+            'config' => [
+                'type' => 'check',
+                'items' => [
+                    [ 'label' => 'appointment', ],
+                ],
+            ],
         ],
 
         'open_sunday' => [
@@ -462,6 +528,17 @@ return [
                 'default' => 0,
             ]
         ],
+        'appointment_sunday' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:tx_hhttaddressplaces_domain_model_periodoftime.appointment',
+            'description' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:tx_hhttaddressplaces_domain_model_periodoftime.appointment.description',
+            'config' => [
+                'type' => 'check',
+                'items' => [
+                    [ 'label' => 'appointment', ],
+                ],
+            ],
+        ],
 
         'periodoftime' => [
             'config' => [
@@ -476,37 +553,37 @@ return [
         'openclose_monday' => [
             'label' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:day.monday',
             'description' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:day.monday.description',
-            'showitem' => 'open_monday, close_monday, open_monday2, close_monday2'
+            'showitem' => 'open_monday, close_monday, open_monday2, close_monday2, --linebreak--, appointment_monday'
         ],
         'openclose_tuesday' => [
             'label' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:day.tuesday',
             'description' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:day.tuesday.description',
-            'showitem' => 'open_tuesday, close_tuesday, open_tuesday2, close_tuesday2'
+            'showitem' => 'open_tuesday, close_tuesday, open_tuesday2, close_tuesday2, --linebreak--, appointment_tuesday'
         ],
         'openclose_wednesday' => [
             'label' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:day.wednesday',
             'description' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:day.wednesday.description',
-            'showitem' => 'open_wednesday, close_wednesday, open_wednesday2, close_wednesday2'
+            'showitem' => 'open_wednesday, close_wednesday, open_wednesday2, close_wednesday2, --linebreak--, appointment_wednesday'
         ],
         'openclose_thursday' => [
             'label' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:day.thursday',
             'description' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:day.thursday.description',
-            'showitem' => 'open_thursday, close_thursday, open_thursday2, close_thursday2'
+            'showitem' => 'open_thursday, close_thursday, open_thursday2, close_thursday2, --linebreak--, appointment_thursday'
         ],
         'openclose_friday' => [
             'label' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:day.friday',
             'description' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:day.friday.description',
-            'showitem' => 'open_friday, close_friday, open_friday2, close_friday2'
+            'showitem' => 'open_friday, close_friday, open_friday2, close_friday2, --linebreak--, appointment_friday'
         ],
         'openclose_saturday' => [
             'label' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:day.saturday',
             'description' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:day.saturday.description',
-            'showitem' => 'open_saturday, close_saturday, open_saturday2, close_saturday2'
+            'showitem' => 'open_saturday, close_saturday, open_saturday2, close_saturday2, --linebreak--, appointment_saturday'
         ],
         'openclose_sunday' => [
             'label' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:day.sunday',
             'description' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:day.sunday.description',
-            'showitem' => 'open_sunday, close_sunday, open_sunday2, close_sunday2'
+            'showitem' => 'open_sunday, close_sunday, open_sunday2, close_sunday2, --linebreak--, appointment_sunday'
         ],
     ],
     'types' => [

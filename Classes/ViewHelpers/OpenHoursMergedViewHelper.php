@@ -41,6 +41,13 @@ namespace HauerHeinrich\HhTtAddressPlaces\ViewHelpers;
     //     'close_sunday' => '00:00:00',
     //     'open_sunday2' => '00:00:00',
     //     'close_sunday2' => '00:00:00',
+    //     'appointment_monday' => 0,
+    //     'appointment_tuesday' => 0,
+    //     'appointment_wednesday' => 0,
+    //     'appointment_thursday' => 0,
+    //     'appointment_friday' => 0,
+    //     'appointment_saturday' => 0,
+    //     'appointment_sunday' => 1,
     // ];
 */
 
@@ -85,6 +92,10 @@ class OpenHoursMergedViewHelper extends AbstractViewHelper {
         foreach ($newArray as $resultDay => $resultValue) {
             foreach ($shortenOpeningHours as $day => $value) {
                 switch ($day) {
+                    case str_contains($day, 'appointment_'.$resultDay) && $value === 1:
+                        $newArray[$resultDay] = [ 'appointment' =>  1 ];
+                        break;
+
                     case str_contains($day, 'open_'.$resultDay):
                         if(isset($shortenOpeningHours['open_'.$resultDay]) && isset($shortenOpeningHours['close_'.$resultDay])) {
                             $timeOpen = new \DateTime($shortenOpeningHours['open_'.$resultDay]);
@@ -98,7 +109,7 @@ class OpenHoursMergedViewHelper extends AbstractViewHelper {
                             $timeClose2 = new \DateTime($shortenOpeningHours['close_'.$resultDay.'2']);
                             $newArray[$resultDay] .= $timeOpen2->format($timeFormat) . ' - ' . $timeClose2->format($timeFormat);
                         }
-                    break;
+                        break;
                     default:
                         break;
                 }
@@ -106,7 +117,16 @@ class OpenHoursMergedViewHelper extends AbstractViewHelper {
         }
 
         $resultArray = [];
+        $appointmentArray = [];
         $i = 0;
+
+        foreach ($newArray as $newArrayKey => $newArrayValue) {
+            if(isset($newArrayValue['appointment'])) {
+                $appointmentArray[] = $newArrayKey;
+                unset($newArray[$newArrayKey]);
+            }
+        }
+
         foreach ($newArray as $resultDay => &$resultValue) {
             if(!empty($resultValue)) {
                 $sameDays = array_intersect($newArray, [$resultValue]);
@@ -124,12 +144,16 @@ class OpenHoursMergedViewHelper extends AbstractViewHelper {
         }
 
         $result = [];
-        foreach ($resultArray as $key => $value) {
+        foreach ($resultArray as $value) {
             if(count($value) > 2) {
-                $result[] = LocalizationUtility::translate('day.'.array_key_first($value), 'hh_tt_address_places') . " - " . LocalizationUtility::translate('day.'.array_key_last($value), 'hh_tt_address_places') . ': ' . $value[array_key_last($value)];
+                $result[] = LocalizationUtility::translate('day.'.array_key_first($value), 'hh_tt_address_places') . " - " . LocalizationUtility::translate('day.'.array_key_last($value), 'hh_tt_address_places') . ': ' . $value[array_key_last($value)] . ' ' . LocalizationUtility::translate('day.hour', 'hh_tt_address_places');
                 continue;
             }
-            $result[] = LocalizationUtility::translate('day.'.array_key_first($value), 'hh_tt_address_places') . ': ' . $value[array_key_last($value)];
+            $result[] = LocalizationUtility::translate('day.'.array_key_first($value), 'hh_tt_address_places') . ': ' . $value[array_key_last($value)] . ' ' . LocalizationUtility::translate('day.hour', 'hh_tt_address_places');
+        }
+
+        foreach ($appointmentArray as $appointmentValue) {
+            $result[] = LocalizationUtility::translate('day.'.$appointmentValue, 'hh_tt_address_places') . ' ' . LocalizationUtility::translate('day.appointment', 'hh_tt_address_places');
         }
 
         return $result;
