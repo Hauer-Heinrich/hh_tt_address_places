@@ -1,0 +1,23 @@
+tt_address {
+    label = company
+}
+
+TCAdefaults.tt_address {
+    tx_extbase_type = place
+}
+
+TCEFORM {
+    tt_address {
+        tx_extbase_type {
+            disabled = 1
+            removeItems = ttAddress_default
+        }
+    }
+}
+
+mod {
+    web_list {
+        allowedNewTables = tt_address
+        hideTables = tt_content,tx_hhttaddressplaces_domain_model_periodoftime
+    }
+}

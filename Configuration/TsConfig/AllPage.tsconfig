@@ -1,0 +1,2 @@
+### Include all PageTS files
+@import 'EXT:hh_tt_address_places/Configuration/TsConfig/Page/*.tsconfig'

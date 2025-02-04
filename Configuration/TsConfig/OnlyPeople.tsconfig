@@ -1,0 +1,15 @@
+TCAdefaults.tt_address {
+    tx_extbase_type = default
+}
+
+TCEFORM {
+    tt_address {
+        tx_extbase_type.disabled = 1
+    }
+}
+
+mod {
+    web_list {
+        allowedNewTables = tt_address
+    }
+}
