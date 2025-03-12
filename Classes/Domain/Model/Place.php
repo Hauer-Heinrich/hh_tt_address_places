@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace HauerHeinrich\HhTtAddressPlaces\Domain\Model;
 
+use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use \TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use \FriendsOfTYPO3\TtAddress\Domain\Model\Address;
 
 /**
@@ -20,6 +22,9 @@ use \FriendsOfTYPO3\TtAddress\Domain\Model\Address;
 class Place extends Address {
 
     protected $txExtbaseType = '';
+
+    /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> */
+    protected $logo;
 
     /**
      * openingHours
@@ -49,7 +54,8 @@ class Place extends Address {
      */
     public function initializeObject()
     {
-        $this->openingHours = $this->openingHours ?: new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->logo = new ObjectStorage();
+        $this->openingHours = $this->openingHours ?: new ObjectStorage();
     }
 
     public function getTxExtbaseType(): string
@@ -60,6 +66,32 @@ class Place extends Address {
     public function setTxExbaseType($extbaseType): void
     {
         $this->txExtbaseType = $extbaseType;
+    }
+
+    public function addLogo(FileReference $logo): void
+    {
+        $this->logo->attach($logo);
+    }
+
+    public function removeLogo(FileReference $logoToRemove): void
+    {
+        $this->logo->detach($logoToRemove);
+    }
+
+    /**
+     * @return ObjectStorage<FileReference>
+     */
+    public function getLogo(): ?ObjectStorage
+    {
+        return $this->logo;
+    }
+
+    /**
+     * @param ObjectStorage<FileReference> $image
+     */
+    public function setImage(ObjectStorage $image): void
+    {
+        $this->image = $image;
     }
 
     /**

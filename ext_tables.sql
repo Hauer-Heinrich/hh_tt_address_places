@@ -1,5 +1,6 @@
 CREATE TABLE tt_address (
     tx_extbase_type varchar(255) DEFAULT '' NOT NULL,
+    logo int(11) unsigned DEFAULT '0',
     opening_hours int(11) unsigned NOT NULL DEFAULT '0',
 );
 

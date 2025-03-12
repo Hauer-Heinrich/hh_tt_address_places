@@ -19,6 +19,9 @@
             </trans-unit>
 
 
+            <trans-unit id="tx_hhttaddressplaces_domain_model_place.logo" resname="tx_hhttaddressplaces_domain_model_place.logo">
+                <source>Logo</source>
+            </trans-unit>
             <trans-unit id="tx_hhttaddressplaces_domain_model_place.opening_hours" resname="tx_hhttaddressplaces_domain_model_place.opening_hours">
                 <source>Opening Hours</source>
             </trans-unit>

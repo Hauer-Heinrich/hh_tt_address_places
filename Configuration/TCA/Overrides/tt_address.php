@@ -43,6 +43,18 @@ call_user_func(function() {
     );
 
     $tmp_hh_tt_address_places_columns = [
+        'logo' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:tx_hhttaddressplaces_domain_model_place.logo',
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'common-image-types',
+                'appearance' => [
+                    'collapseAll' => true,
+                    'expandSingle' => true,
+                ],
+            ],
+        ],
         'opening_hours' => [
             'exclude' => true,
             'label' => 'LLL:EXT:hh_tt_address_places/Resources/Private/Language/locallang_db.xlf:tx_hhttaddressplaces_domain_model_place.opening_hours',
@@ -71,6 +83,7 @@ call_user_func(function() {
             name,
             company,
             --palette--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_palette.building;building,
+            logo,
             image,
             description,
             --div--;LLL:EXT:tt_address/Resources/Private/Language/locallang_db.xlf:tt_address_tab.address,
