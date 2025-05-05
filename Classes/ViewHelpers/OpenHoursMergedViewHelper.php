@@ -14,6 +14,7 @@ namespace HauerHeinrich\HhTtAddressPlaces\ViewHelpers;
         </f:for>
     </f:if>
 
+    $openingHours can be a array of the table: 'tx_hhttaddressplaces_domain_model_periodoftime' OR:
     // $openingHours = [
     //     'open_monday' => '08:00:00',
     //     'close_monday' => '18:30:00',
@@ -54,14 +55,10 @@ namespace HauerHeinrich\HhTtAddressPlaces\ViewHelpers;
 */
 
 // use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use \TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
-use \TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 use \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 
-
-class OpenHoursMergedViewHelper extends AbstractViewHelper {
+final class OpenHoursMergedViewHelper extends AbstractViewHelper {
     /**
     * As this ViewHelper renders HTML, the output must not be escaped.
     *
@@ -69,95 +66,66 @@ class OpenHoursMergedViewHelper extends AbstractViewHelper {
     */
     protected $escapeOutput = false;
 
-    use CompileWithRenderStatic;
-
     public function initializeArguments(){
         $this->registerArgument('hours', 'array', '', true);
         $this->registerArgument('timeFormat', 'string', 'Time format e. g. "H:i:s"', false, 'H:i');
+        $this->registerArgument('seperator', 'string', 'Seperator between opening hour and closing hour', false, ' - ');
     }
 
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext){
-        $openingHours = $arguments['hours'];
+    public function render(): array {
+        $openingHours = $this->arguments['hours'];
         $shortenOpeningHours = array_diff($openingHours, ['00:00:00']);
-        $timeFormat = isset($arguments['timeFormat']) ? $arguments['timeFormat'] : 'H:i';
+        $timeFormat = isset($this->arguments['timeFormat']) ? $this->arguments['timeFormat'] : 'H:i';
 
         $newArray = [
-            'monday' => '',
-            'tuesday' => '',
-            'wednesday' => '',
-            'thursday' => '',
-            'friday' => '',
-            'saturday' => '',
-            'sunday' => ''
+            'monday' => [],
+            'tuesday' => [],
+            'wednesday' => [],
+            'thursday' => [],
+            'friday' => [],
+            'saturday' => [],
+            'sunday' => [],
         ];
+        $resultArray = [];
 
         foreach ($newArray as $resultDay => $resultValue) {
             foreach ($shortenOpeningHours as $day => $value) {
-                switch ($day) {
-                    case str_contains($day, 'appointment_'.$resultDay) && $value === 1:
-                        $newArray[$resultDay] = [ 'appointment' =>  1 ];
-                        break;
-
-                    case str_contains($day, 'open_'.$resultDay):
-                        if(isset($shortenOpeningHours['open_'.$resultDay]) && isset($shortenOpeningHours['close_'.$resultDay])) {
-                            $timeOpen = new \DateTime($shortenOpeningHours['open_'.$resultDay]);
-                            $timeClose = new \DateTime($shortenOpeningHours['close_'.$resultDay]);
-                            $newArray[$resultDay] = $timeOpen->format($timeFormat) . ' - ' . $timeClose->format($timeFormat);
-                        }
-
-                        if(isset($shortenOpeningHours['open_'.$resultDay.'2']) && isset($shortenOpeningHours['close_'.$resultDay.'2'])) {
-                            $newArray[$resultDay] .= empty($newArray[$resultDay]) ? '' : ', ' ;
-                            $timeOpen2 = new \DateTime($shortenOpeningHours['open_'.$resultDay.'2']);
-                            $timeClose2 = new \DateTime($shortenOpeningHours['close_'.$resultDay.'2']);
-                            $newArray[$resultDay] .= $timeOpen2->format($timeFormat) . ' - ' . $timeClose2->format($timeFormat);
-                        }
-                        break;
-                    default:
-                        break;
+                if(str_contains($day, 'appointment_'.$resultDay) && $value === 1) {
+                    $resultArray['days'][$resultDay]['appointment'] = 1;
                 }
-            }
-        }
 
-        $resultArray = [];
-        $appointmentArray = [];
-        $i = 0;
+                if(str_contains($day, 'open_'.$resultDay)) {
+                    if(isset($shortenOpeningHours['open_'.$resultDay]) && isset($shortenOpeningHours['close_'.$resultDay])) {
+                        $timeOpen = new \DateTime($shortenOpeningHours['open_'.$resultDay]);
+                        $timeClose = new \DateTime($shortenOpeningHours['close_'.$resultDay]);
+                        $resultArray['days'][$resultDay]['morning'] = $timeOpen->format($timeFormat) . $this->arguments['seperator'] . $timeClose->format($timeFormat);
+                    }
 
-        foreach ($newArray as $newArrayKey => $newArrayValue) {
-            if(isset($newArrayValue['appointment'])) {
-                $appointmentArray[] = $newArrayKey;
-                unset($newArray[$newArrayKey]);
-            }
-        }
-
-        foreach ($newArray as $resultDay => &$resultValue) {
-            if(!empty($resultValue)) {
-                $sameDays = array_intersect($newArray, [$resultValue]);
-                if(empty(next($newArray)) || next($newArray) != prev($newArray)) {
-                    $resultArray[] = [$resultDay => $sameDays[$resultDay]];
-                    unset($newArray[$resultDay]);
-                } else {
-                    $resultArray[] = $sameDays;
-                    foreach ($sameDays as $k => $v) {
-                        unset($newArray[$k]);
+                    if(isset($shortenOpeningHours['open_'.$resultDay.'2']) && isset($shortenOpeningHours['close_'.$resultDay.'2'])) {
+                        $timeOpen2 = new \DateTime($shortenOpeningHours['open_'.$resultDay.'2']);
+                        $timeClose2 = new \DateTime($shortenOpeningHours['close_'.$resultDay.'2']);
+                        $resultArray['days'][$resultDay]['afternoon'] = $timeOpen2->format($timeFormat) . $this->arguments['seperator'] . $timeClose2->format($timeFormat);
                     }
                 }
             }
-            $i++;
         }
 
-        $result = [];
-        foreach ($resultArray as $value) {
-            if(count($value) > 2) {
-                $result[] = LocalizationUtility::translate('day.'.array_key_first($value), 'hh_tt_address_places') . " - " . LocalizationUtility::translate('day.'.array_key_last($value), 'hh_tt_address_places') . ': ' . $value[array_key_last($value)] . ' ' . LocalizationUtility::translate('day.hour', 'hh_tt_address_places');
-                continue;
-            }
-            $result[] = LocalizationUtility::translate('day.'.array_key_first($value), 'hh_tt_address_places') . ': ' . $value[array_key_last($value)] . ' ' . LocalizationUtility::translate('day.hour', 'hh_tt_address_places');
+        if(isset($openingHours['title'])) {
+            $resultArray['title'] = $openingHours['title'];
         }
 
-        foreach ($appointmentArray as $appointmentValue) {
-            $result[] = LocalizationUtility::translate('day.'.$appointmentValue, 'hh_tt_address_places') . ' ' . LocalizationUtility::translate('day.appointment', 'hh_tt_address_places');
+        if(isset($openingHours['description'])) {
+            $resultArray['description'] = $openingHours['description'];
         }
 
-        return $result;
+        if(isset($openingHours['closed'])) {
+            $resultArray['closed'] = $openingHours['closed'];
+        }
+
+        if(isset($openingHours['valid_for'])) {
+            $resultArray['valid_for'] = $openingHours['valid_for'];
+        }
+
+        return $resultArray;
     }
 }
