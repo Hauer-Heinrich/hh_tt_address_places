@@ -61,8 +61,9 @@ call_user_func(function() {
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_hhttaddressplaces_domain_model_periodoftime',
-                'foreign_field' => 'place',
-                'maxitems' => 9999,
+                'foreign_field' => 'parentid',
+                'foreign_table_field' => 'parenttable',
+                'maxitems' => 999,
                 'appearance' => [
                     'collapseAll' => 0,
                     'levelLinksPosition' => 'top',

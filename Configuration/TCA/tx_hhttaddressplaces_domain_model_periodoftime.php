@@ -64,6 +64,16 @@ return [
                 ],
             ],
         ],
+        'parentid' => [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
+        'parenttable' => [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
 
         'closed_from_date' => [
             'exclude' => true,
@@ -139,12 +149,6 @@ return [
                     ['Wintertime', 1],
                     ['Summertime', 2],
                 ],
-            ],
-        ],
-
-        'place' => [
-            'config' => [
-                'type' => 'passthrough',
             ],
         ],
 

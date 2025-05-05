@@ -5,7 +5,9 @@ CREATE TABLE tt_address (
 );
 
 CREATE TABLE tx_hhttaddressplaces_domain_model_periodoftime (
-    place int(10) unsigned NOT NULL DEFAULT 0,
+    parentid int(11) DEFAULT '0' NOT NULL,
+    parenttable varchar(255) DEFAULT '' NOT NULL,
+
     title varchar(255) NOT NULL DEFAULT '',
     closed int(11) NOT NULL DEFAULT 0,
 
