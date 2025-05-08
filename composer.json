@@ -21,7 +21,7 @@
             "url": "https://www.paypal.com/paypalme/hauerheinrich"
         }
     ],
-    "version": "4.2.0",
+    "version": "4.2.1",
     "license": ["GPL-2.0-or-later"],
     "keywords": ["TYPO3 CMS", "address", "places", "companies", "Extension"],
     "replace": {
@@ -29,7 +29,7 @@
         "typo3-ter/hh-tt-address-places": "self.version"
     },
     "require": {
-        "typo3/cms-core": "^12.4.0 || ^13.4.0",
+        "typo3/cms-core": "12.4.0-13.4.0",
         "friendsoftypo3/tt-address": "^9.0.0"
     },
     "autoload": {
