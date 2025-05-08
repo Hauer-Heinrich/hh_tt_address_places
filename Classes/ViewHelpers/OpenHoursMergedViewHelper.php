@@ -14,7 +14,6 @@ namespace HauerHeinrich\HhTtAddressPlaces\ViewHelpers;
         </f:for>
     </f:if>
 
-    $openingHours can be a array of the table: 'tx_hhttaddressplaces_domain_model_periodoftime' OR:
     // $openingHours = [
     //     'open_monday' => '08:00:00',
     //     'close_monday' => '18:30:00',

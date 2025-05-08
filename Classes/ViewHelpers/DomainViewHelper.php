@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace HauerHeinrich\HhTtAddressPlaces\ViewHelpers;
 
 // use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use \TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 
@@ -21,7 +20,7 @@ use \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  *
  * <place:domain url="{f:uri.typolink(parameter: '{address.www}', absolute: 1)}" domainOnly="1" withoutScheme="1" />
  */
-class DomainViewHelper extends AbstractViewHelper {
+final class DomainViewHelper extends AbstractViewHelper {
 
     public function initializeArguments() {
         $this->registerArgument('url', 'string', '', true);
@@ -29,17 +28,10 @@ class DomainViewHelper extends AbstractViewHelper {
         $this->registerArgument('withoutScheme', 'bool', 'Return url without "scheme"', false, false);
     }
 
-    /**
-     * @param array $arguments
-     * @param \Closure $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
-     *
-     * @return void
-     */
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext) {
-        $givenUrl = $arguments['url'];
-        $domainOnly = $arguments['domainOnly'];
-        $withoutScheme = $arguments['withoutScheme'];
+    public function render(): string {
+        $givenUrl = $this->arguments['url'];
+        $domainOnly = $this->arguments['domainOnly'];
+        $withoutScheme = $this->arguments['withoutScheme'];
 
         if(filter_var($givenUrl, FILTER_VALIDATE_URL)) {
             $urlParts = parse_url($givenUrl);
