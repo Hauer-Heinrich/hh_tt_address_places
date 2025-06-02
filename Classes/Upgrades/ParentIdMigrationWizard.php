@@ -93,6 +93,16 @@ final class ParentIdMigrationWizard implements UpgradeWizardInterface, ChattyInt
     public function updateNecessary(): bool {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_hhttaddressplaces_domain_model_periodoftime');
         $queryBuilder->getRestrictions()->removeAll();
+
+        // check if the field "place" exists
+        $connection = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('tx_hhttaddressplaces_domain_model_periodoftime');
+        $schemaManager = $connection->createSchemaManager();
+        $columns = $schemaManager->listTableColumns('tx_hhttaddressplaces_domain_model_periodoftime');
+        if (!isset($columns['place'])) {
+            return false;
+        }
+
         $whereExpressions = [];
 
         $whereExpressions[] = $queryBuilder->expr()->gt('place', 0);
@@ -130,6 +140,16 @@ final class ParentIdMigrationWizard implements UpgradeWizardInterface, ChattyInt
     protected function getAffectedRows(): array {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_hhttaddressplaces_domain_model_periodoftime');
         $queryBuilder->getRestrictions()->removeAll();
+
+        // check if the field "place" exists
+        $connection = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getConnectionForTable('tx_hhttaddressplaces_domain_model_periodoftime');
+        $schemaManager = $connection->createSchemaManager();
+        $columns = $schemaManager->listTableColumns('tx_hhttaddressplaces_domain_model_periodoftime');
+        if (!isset($columns['place'])) {
+            return [];
+        }
+
         $whereExpressions = [];
 
         $whereExpressions[] = $queryBuilder->expr()->gt('place', 0);
