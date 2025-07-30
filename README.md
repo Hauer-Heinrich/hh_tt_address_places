@@ -19,7 +19,8 @@ For the opening hours: there are example for the FLUID output at hh_tt_address_p
 #### openHoursMerged
 Usage example: (Input can be any supported date and time format).
 optional: timeformat (default: H:i).
-
+optional: mergedDays true/false (groups open/closeing times by weekdays)
+optional: mergedDaysSeperator string (default " - ")
 
 $openingHours description, supports lunch break or similar:
 open_monday: opening time in the morning (08:00:00),

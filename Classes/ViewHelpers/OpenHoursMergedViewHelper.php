@@ -69,6 +69,8 @@ final class OpenHoursMergedViewHelper extends AbstractViewHelper {
         $this->registerArgument('hours', 'array', '', true);
         $this->registerArgument('timeFormat', 'string', 'Time format e. g. "H:i:s"', false, 'H:i');
         $this->registerArgument('seperator', 'string', 'Seperator between opening hour and closing hour', false, ' - ');
+        $this->registerArgument('mergedDays', 'bool', 'If you want to group the weekdays if they has the same opening/closing times', false, false);
+        $this->registerArgument('mergedDaysSeperator', 'string', 'Seperator between merged days (if mergedDays is set)', false, ' - ');
     }
 
     public function render(): array {
@@ -106,6 +108,54 @@ final class OpenHoursMergedViewHelper extends AbstractViewHelper {
                         $resultArray['days'][$resultDay]['afternoon'] = $timeOpen2->format($timeFormat) . $this->arguments['seperator'] . $timeClose2->format($timeFormat);
                     }
                 }
+            }
+        }
+
+        // group an array of weekdays if their contents are identical
+        // and the days are consecutive.
+        // The day names should be merged, e.g. “monday - thursday”
+        if($this->arguments['mergedDays'] == true) {
+            $merged = [];
+            $prevDay = null;
+            $rangeStart = null;
+            $prevValue = null;
+
+            foreach ($newArray as $day => $value) {
+                if (!isset($resultArray['days'][$day])) {
+                    continue;
+                }
+
+                $currentValue = $resultArray['days'][$day];
+
+                if ($prevValue === null) {
+                    // first element
+                    $rangeStart = $day;
+                } elseif ($currentValue !== $prevValue) {
+                    // New content -> Close previous group
+                    if ($rangeStart === $prevDay) {
+                        $merged[$rangeStart] = $prevValue;
+                    } else {
+                        $merged["$rangeStart {$this->arguments['mergedDaysSeperator']} $prevDay"] = $prevValue;
+                    }
+                    $rangeStart = $day;
+                }
+
+                // Prepare last run
+                $prevDay = $day;
+                $prevValue = $currentValue;
+            }
+
+            // last element
+            if ($rangeStart !== null) {
+                if ($rangeStart === $prevDay) {
+                    $merged[$rangeStart] = $prevValue;
+                } else {
+                    $merged["$rangeStart {$this->arguments['mergedDaysSeperator']} $prevDay"] = $prevValue;
+                }
+            }
+
+            if(!empty($merged)) {
+                $resultArray['mergedDays'] = $merged;
             }
         }
 
