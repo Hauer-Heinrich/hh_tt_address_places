@@ -134,8 +134,11 @@ final class OpenHoursMergedViewHelper extends AbstractViewHelper {
                     // New content -> Close previous group
                     if ($rangeStart === $prevDay) {
                         $merged[$rangeStart] = $prevValue;
+                        $merged[$rangeStart]['dayFrom'] = $rangeStart;
                     } else {
                         $merged["$rangeStart {$this->arguments['mergedDaysSeperator']} $prevDay"] = $prevValue;
+                        $merged["$rangeStart {$this->arguments['mergedDaysSeperator']} $prevDay"]['dayFrom'] = $rangeStart;
+                        $merged["$rangeStart {$this->arguments['mergedDaysSeperator']} $prevDay"]['dayTo'] = $prevDay;
                     }
                     $rangeStart = $day;
                 }
@@ -149,8 +152,11 @@ final class OpenHoursMergedViewHelper extends AbstractViewHelper {
             if ($rangeStart !== null) {
                 if ($rangeStart === $prevDay) {
                     $merged[$rangeStart] = $prevValue;
+                    $merged[$rangeStart]['dayFrom'] = $rangeStart;
                 } else {
                     $merged["$rangeStart {$this->arguments['mergedDaysSeperator']} $prevDay"] = $prevValue;
+                    $merged["$rangeStart {$this->arguments['mergedDaysSeperator']} $prevDay"]['dayFrom'] = $rangeStart;
+                    $merged["$rangeStart {$this->arguments['mergedDaysSeperator']} $prevDay"]['dayTo'] = $prevDay;
                 }
             }
 
