@@ -6,6 +6,7 @@ namespace HauerHeinrich\HhTtAddressPlaces\Domain\Model;
 use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use \TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use \FriendsOfTYPO3\TtAddress\Domain\Model\Address;
+use \FriendsOfTYPO3\TtAddress\Utility\PropertyModification;
 
 /**
  * This file is part of the "Address places" Extension for TYPO3 CMS.
@@ -33,6 +34,8 @@ class Place extends Address {
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $openingHours = null;
+
+    protected string $link = '';
 
     /**
      * __construct
@@ -135,5 +138,31 @@ class Place extends Address {
     public function setOpeningHours(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $openingHours)
     {
         $this->openingHours = $openingHours;
+    }
+
+    public function setLink(string $link): void
+    {
+        $this->link = $link;
+    }
+
+    public function getLink(): string
+    {
+        return $this->link;
+    }
+
+    public function getLinkSimplified(): string
+    {
+        return PropertyModification::getCleanedDomain($this->link);
+    }
+
+    public function getFullName(): string
+    {
+        $list = [
+            $this->getCompany(),
+        ];
+
+        $name = implode(' ', array_filter($list));
+
+        return $name;
     }
 }

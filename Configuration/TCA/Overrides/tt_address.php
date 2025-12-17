@@ -73,8 +73,27 @@ call_user_func(function() {
                 ],
             ],
         ],
+        'link' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.link',
+            'config' => [
+                'type' => 'link',
+                'size' => 40,
+                'allowedTypes' => ['page', 'url', 'file'],
+                'appearance' => [
+                    'browserTitle' => 'LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.link',
+                ],
+            ],
+        ],
     ];
     ExtensionManagementUtility::addTCAcolumns('tt_address', $tmp_hh_tt_address_places_columns);
+
+    ExtensionManagementUtility::addToAllTCAtypes(
+        'tt_address',
+        'link',
+        '',
+        'after:description'
+    );
 
     $GLOBALS['TCA']['tt_address']['ctrl']['label_userFunc'] = TcaTtAddress::class . '->label';
     // inherit and extend the show items from the parent class
