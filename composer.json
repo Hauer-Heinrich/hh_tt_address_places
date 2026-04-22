@@ -40,7 +40,11 @@
         "typo3/cms": {
             "cms-package-dir": "{$vendor-dir}/typo3/cms",
             "web-dir": ".Build/Web",
-            "extension-key": "hh_tt_address_places"
+            "extension-key": "hh_tt_address_places",
+            "version": "4.4.2",
+            "Package": {
+                "providesPackages": {}
+            }
         }
     }
 }
