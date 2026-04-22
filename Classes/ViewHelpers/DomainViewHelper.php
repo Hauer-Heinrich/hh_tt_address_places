@@ -22,7 +22,7 @@ use \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 final class DomainViewHelper extends AbstractViewHelper {
 
-    public function initializeArguments() {
+    public function initializeArguments(): void {
         $this->registerArgument('url', 'string', '', true);
         $this->registerArgument('domainOnly', 'bool', 'Return only the domain host, eg. www.domain.tld ', false, false);
         $this->registerArgument('withoutScheme', 'bool', 'Return url without "scheme"', false, false);

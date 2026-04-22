@@ -65,7 +65,7 @@ final class OpenHoursMergedViewHelper extends AbstractViewHelper {
     */
     protected $escapeOutput = false;
 
-    public function initializeArguments(){
+    public function initializeArguments(): void {
         $this->registerArgument('hours', 'array', '', true);
         $this->registerArgument('timeFormat', 'string', 'Time format e. g. "H:i:s"', false, 'H:i');
         $this->registerArgument('seperator', 'string', 'Seperator between opening hour and closing hour', false, ' - ');
