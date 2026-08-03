@@ -5,13 +5,6 @@ use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use \HauerHeinrich\HhTtAddressPlaces\UserFunc\TcaTtAddress;
 
 call_user_func(function() {
-    // $GLOBALS['TCA']['tt_address']['columns']['type']['config']['items']['3'] =
-    //     ['place', 3];
-
-    // $GLOBALS['TCA']['tt_address']['types']['3'] = [
-    //     'showitem' => 'title, bodytext'
-    // ];
-
     if (!isset($GLOBALS['TCA']['tt_address']['ctrl']['type'])) {
         // no type field defined, so we define it here. This will only happen the first time the extension is installed!!
         $GLOBALS['TCA']['tt_address']['ctrl']['type'] = 'tx_extbase_type';

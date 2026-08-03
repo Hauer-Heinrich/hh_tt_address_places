@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace HauerHeinrich\HhTtAddressPlaces\Domain\Model;
 
-// use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -15,9 +14,6 @@ use \TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  * (c) 2023
  */
 
-/**
- * PeriodOfTime
- */
 class PeriodOfTime extends AbstractEntity {
 
     const DAYSOFWEEK = [
@@ -30,16 +26,11 @@ class PeriodOfTime extends AbstractEntity {
     protected int $closed = 0;
 
     /**
-     * closedFromDate
-     *
      * @var \DateTime
-     *
      */
     protected $closedFromDate = 0;
 
     /**
-     * closedToDate
-     *
      * @var \DateTime
      */
     protected $closedToDate = 0;

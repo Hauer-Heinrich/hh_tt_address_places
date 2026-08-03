@@ -17,9 +17,6 @@ use \FriendsOfTYPO3\TtAddress\Utility\PropertyModification;
  * (c) 2022 Christian Hackl <web@hauer-heinrich.de>, www.hauer-heinrich.de
  */
 
-/**
- * Place
- */
 class Place extends Address {
 
     protected $txExtbaseType = '';
