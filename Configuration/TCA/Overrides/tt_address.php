@@ -16,10 +16,10 @@ call_user_func(function() {
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['Default', ''],
+                    ['Default', 'default'],
                     ['Place', 'place']
                 ],
-                'default' => '',
+                'default' => 'default',
                 'size' => 1,
                 'maxitems' => 1,
             ]

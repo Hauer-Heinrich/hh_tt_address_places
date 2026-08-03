@@ -10,7 +10,7 @@ TCEFORM {
     tt_address {
         tx_extbase_type {
             disabled = 1
-            removeItems = ttAddress_default
+            removeItems = default
         }
     }
 }
