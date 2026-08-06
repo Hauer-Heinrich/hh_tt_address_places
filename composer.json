@@ -28,8 +28,8 @@
         "typo3-ter/hh-tt-address-places": "self.version"
     },
     "require": {
-        "typo3/cms-core": "13.4.0-14.3.99",
-        "friendsoftypo3/tt-address": "^10.0.0"
+        "typo3/cms-core": "13.4.0-14.3.0",
+        "friendsoftypo3/tt-address": ">=10.0.0"
     },
     "autoload": {
         "psr-4": {
@@ -41,7 +41,7 @@
             "cms-package-dir": "{$vendor-dir}/typo3/cms",
             "web-dir": ".Build/Web",
             "extension-key": "hh_tt_address_places",
-            "version": "5.0.0",
+            "version": "4.5.0",
             "Package": {
                 "providesPackages": {}
             }

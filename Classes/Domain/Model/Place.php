@@ -7,6 +7,7 @@ use \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use \TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use \FriendsOfTYPO3\TtAddress\Domain\Model\Address;
 use \FriendsOfTYPO3\TtAddress\Utility\PropertyModification;
+use \HauerHeinrich\HhTtAddressPlaces\Domain\Model\PeriodOfTime;
 
 /**
  * This file is part of the "Address places" Extension for TYPO3 CMS.
@@ -17,32 +18,22 @@ use \FriendsOfTYPO3\TtAddress\Utility\PropertyModification;
  * (c) 2022 Christian Hackl <web@hauer-heinrich.de>, www.hauer-heinrich.de
  */
 
-/**
- * Place
- */
 class Place extends Address {
 
-    protected $txExtbaseType = '';
-
-    /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> */
+    /** @var ObjectStorage<FileReference> */
     protected $logo;
 
     /**
      * openingHours
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HauerHeinrich\HhTtAddressPlaces\Domain\Model\PeriodOfTime>
+     * @var ObjectStorage<PeriodOfTime>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
     protected $openingHours = null;
 
     protected string $link = '';
 
-    /**
-     * __construct
-     */
-    public function __construct()
-    {
-
+    public function __construct() {
         // Do not remove the next line: It would break the functionality
         $this->initializeObject();
     }
@@ -55,114 +46,38 @@ class Place extends Address {
      *
      * @return void
      */
-    public function initializeObject()
-    {
+    public function initializeObject(): void {
         $this->logo = new ObjectStorage();
         $this->openingHours = $this->openingHours ?: new ObjectStorage();
     }
 
-    public function getTxExtbaseType(): string
-    {
-        return $this->txExtbaseType;
-    }
-
-    public function setTxExbaseType($extbaseType): void
-    {
-        $this->txExtbaseType = $extbaseType;
-    }
-
-    public function addLogo(FileReference $logo): void
-    {
-        $this->logo->attach($logo);
-    }
-
-    public function removeLogo(FileReference $logoToRemove): void
-    {
-        $this->logo->detach($logoToRemove);
-    }
-
+    public function addLogo(FileReference $logo): void { $this->logo->attach($logo); }
+    public function removeLogo(FileReference $logoToRemove): void { $this->logo->detach($logoToRemove); }
     /**
      * @return ObjectStorage<FileReference>
      */
-    public function getLogo(): ?ObjectStorage
-    {
-        return $this->logo;
-    }
-
+    public function getLogo(): ?ObjectStorage { return $this->logo; }
     /**
-     * @param ObjectStorage<FileReference> $image
+     * @param ObjectStorage<FileReference> $logo
      */
-    public function setImage(ObjectStorage $image): void
-    {
-        $this->image = $image;
-    }
+    public function setLogo(ObjectStorage $logo): void { $this->logo = $logo; }
 
+
+    public function addOpeningHour(PeriodOfTime $openingHour): void { $this->openingHours->attach($openingHour); }
+    public function removeOpeningHour(PeriodOfTime $openingHourToRemove): void { $this->openingHours->detach($openingHourToRemove); }
     /**
-     * Adds a OpeningHoursSpecification
-     *
-     * @param \HauerHeinrich\HhTtAddressPlaces\Domain\Model\PeriodOfTime $openingHour
-     * @return void
+     * @return ObjectStorage<PeriodOfTime> openingHours
      */
-    public function addOpeningHour(\HauerHeinrich\HhTtAddressPlaces\Domain\Model\PeriodOfTime $openingHour)
-    {
-        $this->openingHours->attach($openingHour);
-    }
-
+    public function getOpeningHours() { return $this->openingHours; }
     /**
-     * Removes a OpeningHoursSpecification
-     *
-     * @param \HauerHeinrich\HhTtAddressPlaces\Domain\Model\PeriodOfTime $openingHourToRemove The PeriodOfTime to be removed
-     * @return void
+     * @param ObjectStorage<PeriodOfTime> $openingHours
      */
-    public function removeOpeningHour(\HauerHeinrich\HhTtAddressPlaces\Domain\Model\PeriodOfTime $openingHourToRemove)
-    {
-        $this->openingHours->detach($openingHourToRemove);
-    }
+    public function setOpeningHours(ObjectStorage $openingHours): void { $this->openingHours = $openingHours; }
 
-    /**
-     * Returns the openingHours
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HauerHeinrich\HhTtAddressPlaces\Domain\Model\PeriodOfTime> openingHours
-     */
-    public function getOpeningHours()
-    {
-        return $this->openingHours;
-    }
 
-    /**
-     * Sets the openingHours
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\HauerHeinrich\HhTtAddressPlaces\Domain\Model\PeriodOfTime> $openingHours
-     * @return void
-     */
-    public function setOpeningHours(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $openingHours)
-    {
-        $this->openingHours = $openingHours;
-    }
+    public function setLink(string $link): void { $this->link = $link; }
+    public function getLink(): string { return $this->link; }
 
-    public function setLink(string $link): void
-    {
-        $this->link = $link;
-    }
 
-    public function getLink(): string
-    {
-        return $this->link;
-    }
-
-    public function getLinkSimplified(): string
-    {
-        return PropertyModification::getCleanedDomain($this->link);
-    }
-
-    public function getFullName(): string
-    {
-        $list = [
-            $this->getCompany(),
-        ];
-
-        $name = implode(' ', array_filter($list));
-
-        return $name;
-    }
+    public function getLinkSimplified(): string { return PropertyModification::getCleanedDomain($this->link); }
 }

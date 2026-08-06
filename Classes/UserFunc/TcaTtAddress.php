@@ -23,7 +23,6 @@ class TcaTtAddress {
      * @param array $parameters
      * @deprecated experimental
      * @todo
-     * @return void
      */
     public function label(array &$parameters): void {
         $title = '';
