@@ -4,8 +4,10 @@ declare(strict_types=1);
 namespace HauerHeinrich\HhTtAddressPlaces\ViewHelpers;
 
 /*
-    Usage: (Input can be any supported date and time format.)
+    Usage: (Input can be the raw database row (array) OR a PeriodOfTime domain model.)
+
     <places:openHoursMerged hours="{openingHours}" />
+    <places:openHoursMerged hours="{periodOfTime}" />
 
     <f:variable name="openHours"><places:openHoursMerged hours="{openingHours}" /></f:variable>
     <f:if condition="{openHours}">
@@ -51,22 +53,35 @@ namespace HauerHeinrich\HhTtAddressPlaces\ViewHelpers;
     //     'appointment_saturday' => 0,
     //     'appointment_sunday' => 1,
     // ];
+    //
+    // or:
+    //
+    // $openingHours = instance of \HauerHeinrich\HhTtAddressPlaces\Domain\Model\PeriodOfTime
 */
 
 // use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use HauerHeinrich\HhTtAddressPlaces\Domain\Model\PeriodOfTime;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 
 final class OpenHoursMergedViewHelper extends AbstractViewHelper {
     /**
-    * As this ViewHelper renders HTML, the output must not be escaped.
-    *
     * @var bool
     */
     protected $escapeOutput = false;
 
+    private const WEEKDAYS = [
+        'monday',
+        'tuesday',
+        'wednesday',
+        'thursday',
+        'friday',
+        'saturday',
+        'sunday',
+    ];
+
     public function initializeArguments(): void {
-        $this->registerArgument('hours', 'array', '', true);
+        $this->registerArgument('hours', 'mixed', 'Opening hours as raw database row (array) or as PeriodOfTime domain model', true);
         $this->registerArgument('timeFormat', 'string', 'Time format e. g. "H:i:s"', false, 'H:i');
         $this->registerArgument('seperator', 'string', 'Seperator between opening hour and closing hour', false, ' - ');
         $this->registerArgument('mergedDays', 'bool', 'If you want to group the weekdays if they has the same opening/closing times', false, false);
@@ -74,24 +89,20 @@ final class OpenHoursMergedViewHelper extends AbstractViewHelper {
     }
 
     public function render(): array {
-        $openingHours = $this->arguments['hours'];
-        $shortenOpeningHours = array_diff($openingHours, ['00:00:00']);
+        $openingHours = $this->normalizeHours($this->arguments['hours']);
+
+        // '00:00:00' comes from raw database rows, '' (empty string) from the domain model.
+        // Both mean "no opening time set" and must be removed, otherwise
+        // new \DateTime('') would silently resolve to the *current* time!
+        $shortenOpeningHours = array_diff($openingHours, ['00:00:00', '']);
         $timeFormat = isset($this->arguments['timeFormat']) ? $this->arguments['timeFormat'] : 'H:i';
 
-        $newArray = [
-            'monday' => [],
-            'tuesday' => [],
-            'wednesday' => [],
-            'thursday' => [],
-            'friday' => [],
-            'saturday' => [],
-            'sunday' => [],
-        ];
+        $newArray = array_fill_keys(self::WEEKDAYS, []);
         $resultArray = [];
 
         foreach ($newArray as $resultDay => $resultValue) {
             foreach ($shortenOpeningHours as $day => $value) {
-                if(str_contains($day, 'appointment_'.$resultDay) && $value === 1) {
+                if(str_contains($day, 'appointment_'.$resultDay) && (int)$value === 1) {
                     $resultArray['days'][$resultDay]['appointment'] = 1;
                 }
 
@@ -182,5 +193,54 @@ final class OpenHoursMergedViewHelper extends AbstractViewHelper {
         }
 
         return $resultArray;
+    }
+
+    /**
+     * Brings both supported input types into the flat snake_case structure
+     * of the raw database row, so the rest of the ViewHelper can stay untouched.
+     *
+     * Arrays are passed through as-is. Objects (e. g. the PeriodOfTime domain
+     * model) are mapped via their getters - method_exists() is used, so any
+     * object providing the same getters will work as well ("duck typing").
+     *
+     * @param array|object $hours
+     */
+    private function normalizeHours($hours): array {
+        if (is_array($hours)) {
+            return $hours;
+        }
+
+        if (!is_object($hours) && !$hours instanceof PeriodOfTime) {
+            throw new \InvalidArgumentException(
+                'The argument "hours" must be an array or an object like ' . PeriodOfTime::class . ', ' . gettype($hours) . ' given.',
+                1786320001
+            );
+        }
+
+        $fieldToGetterMap = [
+            'title' => 'getTitle',
+            'description' => 'getDescription',
+            'closed' => 'getClosed',
+            'valid_for' => 'getValidFor',
+        ];
+
+        foreach (self::WEEKDAYS as $day) {
+            $ucDay = \ucfirst($day);
+
+            $fieldToGetterMap['open_' . $day] = 'getOpen' . $ucDay;
+            $fieldToGetterMap['open_' . $day . '2'] = 'getOpen' . $ucDay . '2';
+            $fieldToGetterMap['close_' . $day] = 'getClose' . $ucDay;
+            $fieldToGetterMap['close_' . $day . '2'] = 'getClose' . $ucDay . '2';
+            $fieldToGetterMap['appointment_' . $day] = 'getAppointment' . $ucDay;
+        }
+
+        $normalized = [];
+        foreach ($fieldToGetterMap as $field => $getter) {
+            if (method_exists($hours, $getter)) {
+                $normalized[$field] = $hours->{$getter}();
+            }
+        }
+
+        return $normalized;
     }
 }
