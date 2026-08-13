@@ -28,7 +28,7 @@
         "typo3-ter/hh-tt-address-places": "self.version"
     },
     "require": {
-        "typo3/cms-core": "13.4.0-13.4.0",
+        "typo3/cms-core": "13.4.0-14.3.99",
         "friendsoftypo3/tt-address": ">=10.0.0"
     },
     "autoload": {
