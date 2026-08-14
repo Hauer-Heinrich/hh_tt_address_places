@@ -72,11 +72,11 @@ final class UpdateTxExtbaseTypeMigrationWizard implements UpgradeWizardInterface
             $queryBuilder->update('tt_address');
             $queryBuilder
                 ->where(
-                    $queryBuilder->expr()->eq('uid', $row['uid']),
+                    $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($row['uid'], \PDO::PARAM_INT)),
                     $queryBuilder->expr()->or(
-                        $queryBuilder->expr()->eq('tx_extbase_type', 'ttAddress_default'),
-                        $queryBuilder->expr()->eq('tx_extbase_type', 'ttaddress_default'),
-                        $queryBuilder->expr()->eq('tx_extbase_type', '')
+                        $queryBuilder->expr()->eq('tx_extbase_type', $queryBuilder->createNamedParameter('ttAddress_default')),
+                        $queryBuilder->expr()->eq('tx_extbase_type', $queryBuilder->createNamedParameter('ttaddress_default')),
+                        $queryBuilder->expr()->eq('tx_extbase_type', $queryBuilder->createNamedParameter(''))
                     )
                 )
                 ->set('tx_extbase_type', 'default');
@@ -112,9 +112,9 @@ final class UpdateTxExtbaseTypeMigrationWizard implements UpgradeWizardInterface
             ->from('tt_address');
         $queryBuilder->where(
             $queryBuilder->expr()->or(
-                $queryBuilder->expr()->eq('tx_extbase_type', 'ttAddress_default'),
-                $queryBuilder->expr()->eq('tx_extbase_type', 'ttaddress_default'),
-                $queryBuilder->expr()->eq('tx_extbase_type', '')
+                $queryBuilder->expr()->eq('tx_extbase_type', $queryBuilder->createNamedParameter('ttAddress_default')),
+                $queryBuilder->expr()->eq('tx_extbase_type', $queryBuilder->createNamedParameter('ttaddress_default')),
+                $queryBuilder->expr()->eq('tx_extbase_type', $queryBuilder->createNamedParameter(''))
             )
         );
         $results = $queryBuilder->executeQuery()->fetchAllAssociative();
@@ -159,9 +159,9 @@ final class UpdateTxExtbaseTypeMigrationWizard implements UpgradeWizardInterface
             ->from('tt_address');
         $queryBuilder->where(
             $queryBuilder->expr()->or(
-                $queryBuilder->expr()->eq('tx_extbase_type', 'ttAddress_default'),
-                $queryBuilder->expr()->eq('tx_extbase_type', 'ttaddress_default'),
-                $queryBuilder->expr()->eq('tx_extbase_type', '')
+                $queryBuilder->expr()->eq('tx_extbase_type', $queryBuilder->createNamedParameter('ttAddress_default')),
+                $queryBuilder->expr()->eq('tx_extbase_type', $queryBuilder->createNamedParameter('ttaddress_default')),
+                $queryBuilder->expr()->eq('tx_extbase_type', $queryBuilder->createNamedParameter(''))
             )
         );
         $results = $queryBuilder->executeQuery()->fetchAllAssociative();
