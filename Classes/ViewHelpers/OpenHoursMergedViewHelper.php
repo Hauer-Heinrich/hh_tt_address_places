@@ -60,8 +60,8 @@ namespace HauerHeinrich\HhTtAddressPlaces\ViewHelpers;
 */
 
 // use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use HauerHeinrich\HhTtAddressPlaces\Domain\Model\PeriodOfTime;
-use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use \HauerHeinrich\HhTtAddressPlaces\Domain\Model\PeriodOfTime;
+use \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 
 final class OpenHoursMergedViewHelper extends AbstractViewHelper {

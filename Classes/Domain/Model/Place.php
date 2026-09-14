@@ -20,12 +20,12 @@ use \HauerHeinrich\HhTtAddressPlaces\Domain\Model\PeriodOfTime;
 
 class Place extends Address {
 
+    protected string $txExtbaseType = 'place';
+
     /** @var ObjectStorage<FileReference> */
     protected $logo;
 
     /**
-     * openingHours
-     *
      * @var ObjectStorage<PeriodOfTime>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      */
@@ -49,6 +49,14 @@ class Place extends Address {
     public function initializeObject(): void {
         $this->logo = new ObjectStorage();
         $this->openingHours = $this->openingHours ?: new ObjectStorage();
+    }
+
+    public function getType(): string { return $this->txExtbaseType; }
+    public function setExtBaseType(string $value): void { $this->txExtbaseType = $value; }
+    public function getTxExtbaseType(): string { return $this->txExtbaseType; }
+
+    public function getFullName(): string {
+        return $this->getCompany();
     }
 
     public function addLogo(FileReference $logo): void { $this->logo->attach($logo); }
