@@ -12,7 +12,6 @@ namespace HauerHeinrich\HhTtAddressPlaces\UserFunc;
  *  (c) 2021 Christian Hackl <chackl@hauer-heinrich.de>, www.Hauer-Heinrich.de
  */
 
-// use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \TYPO3\CMS\Backend\Utility\BackendUtility;
 
 class TcaTtAddress {

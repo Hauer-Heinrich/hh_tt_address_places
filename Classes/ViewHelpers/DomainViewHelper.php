@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace HauerHeinrich\HhTtAddressPlaces\ViewHelpers;
 
-// use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 

@@ -14,7 +14,7 @@ $EM_CONF['hh_tt_address_places'] = [
     'title' => 'Address places',
     'description' => 'Simply adds places / companies TCA for EXT:tt_address.',
     'category' => 'plugin',
-    'version' => '5.2.0',
+    'version' => '5.3.0',
     'state' => 'beta',
     'uploadfolder' => false,
     'clearcacheonload' => false,
@@ -23,7 +23,7 @@ $EM_CONF['hh_tt_address_places'] = [
     'author_company' => NULL,
     'constraints' => [
         'depends' => [
-            'typo3' => '13.4.0-13.4.99',
+            'typo3' => '13.4.0-14.3.99',
             'tt_address' => '>=10.0.0',
         ],
         'conflicts' => [
